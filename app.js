@@ -18,6 +18,10 @@ function App() {
     fetchUsers();
   }, [page]);
 
+  const handleDelete = (id) => {
+    setUsers((prev) => prev.filter((u) => u.id !== id));
+  };
+
   const styles = {
     container: {
       padding: 16
@@ -30,6 +34,19 @@ function App() {
       padding: 8,
       border: '1px solid #ddd',
       marginBottom: 8
+    },
+    deletebtn: {
+      backgroundColor: '#f44336',
+      color: '#fff',
+      padding: '6px 8px',
+      border: 'none',
+      cursor: 'pointer',
+      marginTop: 8
+    },
+    pagination: {
+      marginTop: 12,
+      display: 'flex',
+      alignItems: 'center'
     }
   };
 
@@ -43,16 +60,34 @@ function App() {
             {user.first_name} {user.last_name}
           </strong>
           <div>{user.email}</div>
+          <button
+            style={styles.deletebtn}
+            onClick={() => handleDelete(user.id)}
+          >
+            Delete
+          </button>
         </div>
       ))}
+
+      <div style={styles.pagination}>
+        <button
+          disabled={page <= 1}
+          onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+        >
+          Prev
+        </button>
+        <span style={{ margin: '0 8px' }}>Page {page}</span>
+        <button onClick={() => setPage(prev => prev + 1)}>Next</button>
+      </div>
     </div>
   );
 }
 
 export default App;
-<button
-    style={styles.deletebtn}
-    onClick ={() => handledelete(user.id)}
-    > </button>
+ 
+
+
+
+
 
 
